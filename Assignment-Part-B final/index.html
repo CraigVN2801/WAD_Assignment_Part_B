@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <title>Craig's World</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="scriptLP.js"></script>
+<link rel="stylesheet" href="styleSheetlp.css">
+<body>
+<div id="id01" class="modal">
+    <div class="WelcomeMessage">
+        <h2>Welcome to Craig's World</h2>
+        <h3>Please sign in below</h3>
+    </div>
+
+  <div class="imgcontainer">
+    <img src="Images/logo.jpg" style="height: 225%; width: 25%;" alt="Company Logo" class="logo">
+  </div>
+
+  <body id="middle">
+  <div class="container">
+    <form action="ClientSide/clientHomePage.html">
+    <label for="email">Email</label>
+    <input type="text" id="emaillogin" placeholder="Enter Email" name="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="passwordlogin" placeholder="Enter Password" name="password" required>
+        
+      <br>
+      <button id="loginBut" type="button">Login</button>
+      <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCM6h3qAxMMh-GZU8ngXDmRRY7luQE48Uo",
+          authDomain: "authe-9e76a.firebaseapp.com",
+          projectId: "authe-9e76a",
+          storageBucket: "authe-9e76a.appspot.com",
+          messagingSenderId: "274908983184",
+          appId: "1:274908983184:web:2f8b62f85cbc5aa3ed4d15"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+      
+        document.getElementById("loginBut").addEventListener('click', function(){
+          const email1 = document.getElementById("emaillogin").value
+          const password1 = document.getElementById("passwordlogin").value
+      
+        signInWithEmailAndPassword(auth, email1, password1)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          // ...
+          //window.alert("logged in")
+          window.location.href='./ClientSide/clientHomePage.html';
+          window.alert("Login successful")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          window.alert("Error occured: "+errorCode +" "+ errorMessage)
+        });
+      
+            })
+      </script>
+      
+    </form>
+  </div>
+
+  
+
+  <div class="container" style="background-color:#f1f1f1">
+    <div class="popup" onclick="popFunction()">Forgot Password?
+      <span class="popuptext" id="myPopup">Please contact an admin at "help@cworld.com"</span>
+    </div>
+    
+  </div>
+  </body>
+
+</body>
+</html>
+
+
